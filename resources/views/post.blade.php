@@ -23,19 +23,17 @@
 
 		<section class="post">
 
-			<a href="#" class="btn btn-primary"><- Listado</a>
+			<a href="{{ url('/post/list') }}" class="btn btn-primary"><- Listado</a>
 			
 			<article class="post">
 				
 				<div class="page-header">
-					<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/> <small>24-11-2016</small></h3>
+					<h3>{{ $post->title }}<br/> <small>{{ $post->publish_date }}</small></h3>
 				</div>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate exercitationem inventore quidem, provident hic, praesentium veritatis? Iusto expedita excepturi voluptatum, sint reprehenderit eligendi, ab laudantium accusamus veritatis iste eius vel!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa illum accusantium enim, eum quos ad deserunt unde repellat optio, voluptates maxime ullam recusandae minima autem dolores non mollitia nobis iure.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit molestiae ullam atque similique quod est, assumenda laboriosam, facere deserunt commodi voluptas. Quibusdam facilis provident ut consequatur, dolorem sequi reprehenderit, qui!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, quasi, sint. Quae deleniti consequatur, sunt similique animi dicta repellat ex corporis quasi deserunt consectetur quia tempora odio ab nam fugiat.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, et blanditiis qui! Repellat a, repellendus optio. Commodi ducimus sapiente, magni voluptatum. Nesciunt rem quibusdam, eius iure voluptatem nisi cupiditate animi?</p>
+				<p>
+					{{ $post->description }}
+				</p>
 
 			</article>
 
@@ -61,16 +59,21 @@
 
 					{{-- Comments list --}}
 					<div role="tabpanel" class="tab-pane active" id="list">
-
+					
 						{{-- Bucle de comentarios --}}
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h3 class="panel-title">Usuario</h3>
+						@foreach($comments as $comment)
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h3 class="panel-title">
+										{{ $comment->username }}
+										<a href="{{ url('comments/deletecomment/'.$comment->id) }}" class="btn btn-danger btn-xs pull-right">X</a>
+									</h3>
+								</div>
+								<div class="panel-body">
+									{{ $comment->text }}
+								</div>
 							</div>
-							<div class="panel-body">
-								Test
-							</div>
-						</div>
+						@endforeach
 						{{-- END Bucle de comentarios --}}
 
 					</div>
@@ -83,6 +86,8 @@
 							<form action="{{ url('comments/createcomment') }}" method="POST">
 								{{ csrf_field() }}
 								
+								<input type="hidden" name="post_id" value="{{ $post->id }}">
+
 								<label for="user">Usuario:</label>
 								<input type="text" name="user" id="user" class="form-control" required><br/>
 

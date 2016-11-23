@@ -20,17 +20,19 @@
 
 		<section class="posts">
 			
-			<article class="post">
-				
-				<div class="page-header">
-					<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/> <small>24-11-2016</small></h3>
-				</div>
+			@foreach($posts as $post)
+				<article class="post">
+					
+					<div class="page-header">
+						<h3>{{ $post->title }}<br/> <small>{{ $post->publish_date }}</small></h3>
+					</div>
 
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate exercitationem inventore quidem, provident hic, praesentium veritatis? Iusto expedita excepturi voluptatum, sint reprehenderit eligendi, ab laudantium accusamus veritatis iste eius vel!</p>
+					<p>{{ $post->resume }}</p>
 
-				<a href="#" class="btn btn-primary">Ver post -></a>
+					<a href="{{ url('/post/post/'.$post->id) }}" class="btn btn-primary">Ver post -></a>
 
-			</article>
+				</article>
+			@endforeach
 
 		</section>
 
