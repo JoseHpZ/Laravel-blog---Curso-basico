@@ -16,7 +16,7 @@ class PostController extends Controller
  
     public function getList() {
 
-        $data['posts'] = Post::all();
+        $data['posts'] = Post::where('status', 1)->get();
 
         return view('index', $data);
     }
