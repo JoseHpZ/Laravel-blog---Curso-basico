@@ -1,4 +1,4 @@
-## Laravel Blog - Curso Udemy
+## Laravel Blog - Curso Básico
 
 Instrucciones para instalar:
 
@@ -6,7 +6,7 @@ Instrucciones para instalar:
  - Ejecutar:
   `composer install`
 
-Este proyecto es para practicar con el curso oficial en Udemy.
+Este proyecto es para practicar con el curso básico de laravel.
 
 Para cualquier duda:
 
